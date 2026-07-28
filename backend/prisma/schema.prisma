@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  pdfs      Pdf[]
+}
+
+model Pdf {
+  id          String   @id @default(cuid())
+  name        String
+  storagePath String
+  size        Int
+  numPages    Int      @default(0)
+  lastPage    Int      @default(1)
+  createdAt   DateTime @default(now())
+  openedAt    DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
