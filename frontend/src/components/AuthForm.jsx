@@ -24,7 +24,6 @@ export default function AuthForm({ mode, onSubmit }) {
   return (
     <div className="min-h-screen bg-paper flex flex-col items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        {/* Brand */}
         <div className="mb-8 text-center">
           <h1 className="font-serif text-3xl font-bold text-ink">
             <span className="text-green">পড়ার ঘর</span>
@@ -59,7 +58,14 @@ export default function AuthForm({ mode, onSubmit }) {
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-muted block mb-1">Password</span>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-sm font-medium text-muted">Password</span>
+                {mode === 'login' && (
+                  <Link to="/forgot-password" className="text-xs text-green hover:underline">
+                    Forgot password?
+                  </Link>
+                )}
+              </div>
               <input
                 type="password" value={form.password} onChange={set('password')} required
                 placeholder={mode === 'register' ? 'At least 6 characters' : ''}

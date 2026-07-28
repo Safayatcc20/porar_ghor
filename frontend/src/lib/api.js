@@ -25,12 +25,13 @@ async function req(path, options = {}) {
   return res.json();
 }
 
-// Auth
 export const api = {
   auth: {
-    register: (data) => req('/api/auth/register', { method: 'POST', body: JSON.stringify(data) }),
-    login:    (data) => req('/api/auth/login',    { method: 'POST', body: JSON.stringify(data) }),
-    me:       ()     => req('/api/auth/me'),
+    register:       (data)            => req('/api/auth/register',        { method: 'POST', body: JSON.stringify(data) }),
+    login:          (data)            => req('/api/auth/login',           { method: 'POST', body: JSON.stringify(data) }),
+    me:             ()                => req('/api/auth/me'),
+    forgotPassword: (email)           => req('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
+    resetPassword:  (token, password) => req('/api/auth/reset-password',  { method: 'POST', body: JSON.stringify({ token, password }) }),
   },
   pdfs: {
     list:           ()           => req('/api/pdfs'),
